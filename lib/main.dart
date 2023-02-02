@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:sixth_app/screens/auth_screen.dart';
 import 'package:sixth_app/screens/chat_screen.dart';
 
 void main() async {
@@ -14,9 +15,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'FlutterChat',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
+            .copyWith(secondary: Colors.deepOrange),
       ),
-      home: ChatScreen(),
+      home: AuthScreen(),
     );
   }
 }
