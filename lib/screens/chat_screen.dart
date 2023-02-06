@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:sixth_app/widgets/chat/messages.dart';
+import 'package:sixth_app/widgets/chat/new_massage.dart';
 
 class ChatScreen extends StatelessWidget {
   @override
@@ -43,16 +45,9 @@ class ChatScreen extends StatelessWidget {
             Expanded(
               child: Messages(),
             ),
+            NewMessage(),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          FirebaseFirestore.instance
-              .collection('chats/u5w5WQT1OM8KUUtvRKhp/messages')
-              .add({'text': 'This was added by clicking the button!'});
-        },
       ),
     );
   }
