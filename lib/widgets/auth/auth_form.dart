@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sixth_app/widgets/pickers/user_image_picker.dart';
 
 class AuthForm extends StatefulWidget {
   final void Function(
@@ -58,6 +59,7 @@ class _AuthFormState extends State<AuthForm> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  if (!_isLogin) UserImagePicker(), //showing image picker only in login mode
                   TextFormField(
                     key: ValueKey('email'),
                     keyboardType: TextInputType.emailAddress,
