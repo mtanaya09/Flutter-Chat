@@ -16,11 +16,11 @@ class _AuthScreenState extends State<AuthScreen> {
   final _auth = FirebaseAuth.instance;
   var _isLoading = false;
 
-  void _submitAuthForm(
+  Future<void> _submitAuthForm(
     String email,
     String password,
     String username,
-    File image,
+    File? image,
     bool isLogin,
     BuildContext ctx,
   ) async {
@@ -45,8 +45,8 @@ class _AuthScreenState extends State<AuthScreen> {
         final ref = FirebaseStorage.instance
             .ref()
             .child('user_images')
-            .child(authResult.user.uid + '.jpg');
-        await ref.putFile(image);
+            .child('${authResult.user?.uid}.jpg');
+        await ref.putFile(image!);
 
         //getting image URL
         final url = await ref.getDownloadURL();
@@ -54,7 +54,7 @@ class _AuthScreenState extends State<AuthScreen> {
         //storing extra user's data
         await FirebaseFirestore.instance
             .collection('users')
-            .doc(authResult.user.uid)
+            .doc(authResult.user?.uid)
             .set({
           'username': username,
           'email': email,
@@ -64,9 +64,9 @@ class _AuthScreenState extends State<AuthScreen> {
     } on PlatformException catch (err) {
       var message = 'An error occured, please check your credentials!';
       if (err.message != null) {
-        message = err.message;
+        message = err.message!;
       }
-      Scaffold.of(ctx).showSnackBar(
+      ScaffoldMessenger.of(ctx).showSnackBar(
         SnackBar(
           content: Text(message),
           backgroundColor: Theme.of(ctx).errorColor,

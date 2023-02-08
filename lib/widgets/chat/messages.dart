@@ -26,16 +26,16 @@ class Messages extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             }
-            final chatDocs = chatSnapshot.data.docs;
+            final chatDocs = chatSnapshot.data?.docs;
             return ListView.builder(
               reverse: true,
-              itemCount: chatDocs.length,
+              itemCount: chatDocs?.length,
               itemBuilder: (ctx, index) => MessageBubble(
-                chatDocs[index]['text'],
-                chatDocs[index]['username'],
-                chatDocs[index]['userImage'],
-                chatDocs[index]['userId'] == futureSnapshot.data.uid,
-                key: ValueKey(chatDocs[index]), //errrorrr here
+                chatDocs?[index]['text'],
+                chatDocs?[index]['username'],
+                chatDocs?[index]['userImage'],
+                chatDocs?[index]['userId'] == futureSnapshot.data?.uid,
+                key: ValueKey(chatDocs?[index]), //errrorrr here
               ),
             );
           },

@@ -8,11 +8,12 @@ class MessageBubble extends StatelessWidget {
   final bool isMe;
 
   MessageBubble(this.message, this.userName, this.userImage, this.isMe,
-      {this.key});
+      {required this.key});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
+      clipBehavior: Clip.none,
       children: [
         Row(
           mainAxisAlignment:
@@ -29,11 +30,11 @@ class MessageBubble extends StatelessWidget {
                 ),
               ),
               width: 140,
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 vertical: 10,
                 horizontal: 16,
               ),
-              margin: EdgeInsets.symmetric(
+              margin: const EdgeInsets.symmetric(
                 vertical: 12,
                 horizontal: 8,
               ),
@@ -45,17 +46,13 @@ class MessageBubble extends StatelessWidget {
                     userName,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: isMe
-                          ? Colors.black
-                          : Theme.of(context).accentTextTheme.headline1.color,
+                      color: isMe ? Colors.black : Colors.grey,
                     ),
                   ),
                   Text(
                     message,
                     style: TextStyle(
-                      color: isMe
-                          ? Colors.black
-                          : Theme.of(context).accentTextTheme.headline1.color,
+                      color: isMe ? Colors.black : Colors.white,
                     ),
                     textAlign: isMe ? TextAlign.end : TextAlign.start,
                   ),
@@ -74,7 +71,6 @@ class MessageBubble extends StatelessWidget {
           ),
         ),
       ],
-      clipBehavior: Clip.none,
       // overflow: Overflow.visible,
     );
   }

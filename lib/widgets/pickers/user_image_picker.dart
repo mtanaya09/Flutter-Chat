@@ -11,7 +11,7 @@ class UserImagePicker extends StatefulWidget {
 }
 
 class _UserImagePickerState extends State<UserImagePicker> {
-  File _pickedImage;
+  File? _pickedImage;
 
   void _pickImage() async {
     final picker = ImagePicker();
@@ -21,7 +21,7 @@ class _UserImagePickerState extends State<UserImagePicker> {
       maxWidth: 150,
     );
     final pickedImageFile =
-        File(pickedImage.path); // requires import 'dart:io';
+        File(pickedImage!.path); // requires import 'dart:io';
     setState(() {
       _pickedImage = pickedImageFile;
     });
@@ -36,7 +36,7 @@ class _UserImagePickerState extends State<UserImagePicker> {
           radius: 40,
           backgroundColor: Colors.grey,
           backgroundImage:
-              _pickedImage != null ? FileImage(_pickedImage) : null,
+              _pickedImage != null ? FileImage(_pickedImage!) : null,
         ),
         TextButton.icon(
           onPressed: _pickImage,
