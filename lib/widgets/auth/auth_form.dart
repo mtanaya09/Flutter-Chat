@@ -14,10 +14,7 @@ class AuthForm extends StatefulWidget {
 
   final bool isLoading;
 
-  AuthForm(
-    this.submitFn,
-    this.isLoading,
-  );
+  const AuthForm(this.submitFn, this.isLoading, {super.key});
 
   @override
   State<AuthForm> createState() => _AuthFormState();
@@ -42,7 +39,7 @@ class _AuthFormState extends State<AuthForm> {
 
     if (_userImageFile == null && !_isLogin) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Please pick an image.'),
           backgroundColor: Colors.red,
         ),
@@ -68,10 +65,10 @@ class _AuthFormState extends State<AuthForm> {
   Widget build(BuildContext context) {
     return Center(
       child: Card(
-        margin: EdgeInsets.all(20),
+        margin: const EdgeInsets.all(20),
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Form(
               key: _formKey,
               child: Column(
@@ -81,9 +78,13 @@ class _AuthFormState extends State<AuthForm> {
                     UserImagePicker(
                         _pickedImage), //showing image picker only in login mode
                   TextFormField(
-                    key: ValueKey('email'),
+                    key: const ValueKey('email'),
+                    autocorrect: false,
+                    textCapitalization: TextCapitalization.none,
+                    enableSuggestions: false,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(labelText: 'Email Address'),
+                    decoration:
+                        const InputDecoration(labelText: 'Email Address'),
                     validator: (value) {
                       if (value == null || !value.contains('@')) {
                         return 'Please enter a valid email address.';
@@ -96,8 +97,10 @@ class _AuthFormState extends State<AuthForm> {
                   ),
                   if (!_isLogin)
                     TextFormField(
-                      key: ValueKey('username'),
-                      decoration: InputDecoration(labelText: 'Username'),
+                      key: const ValueKey('username'),
+                      autocorrect: true,
+                      enableSuggestions: false,
+                      decoration: const InputDecoration(labelText: 'Username'),
                       validator: (value) {
                         if (value == null || value.length < 4) {
                           return 'Please enter at least 4 characters';
@@ -109,8 +112,8 @@ class _AuthFormState extends State<AuthForm> {
                       },
                     ),
                   TextFormField(
-                    key: ValueKey('password'),
-                    decoration: InputDecoration(labelText: 'Password'),
+                    key: const ValueKey('password'),
+                    decoration: const InputDecoration(labelText: 'Password'),
                     obscureText: true,
                     validator: (value) {
                       if (value == null || value.length < 7) {
@@ -122,8 +125,8 @@ class _AuthFormState extends State<AuthForm> {
                       _userPassword = value!;
                     },
                   ),
-                  SizedBox(height: 12),
-                  if (widget.isLoading) CircularProgressIndicator(),
+                  const SizedBox(height: 12),
+                  if (widget.isLoading) const CircularProgressIndicator(),
                   if (!widget.isLoading)
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -131,8 +134,8 @@ class _AuthFormState extends State<AuthForm> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                      child: Text(_isLogin ? 'Login' : 'Signup'),
                       onPressed: _trySubmit,
+                      child: Text(_isLogin ? 'Login' : 'Signup'),
                     ),
                   if (!widget.isLoading)
                     TextButton(

@@ -3,14 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sixth_app/screens/auth_screen.dart';
 import 'package:sixth_app/screens/chat_screen.dart';
+import 'package:sixth_app/screens/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,10 +25,13 @@ class MyApp extends StatelessWidget {
       home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (ctx, userSnapshot) {
-            if (userSnapshot.hasData) {
-              return ChatScreen();
+            if (userSnapshot.connectionState == ConnectionState.waiting) {
+              return const SplashScreen();
             }
-            return AuthScreen();
+            if (userSnapshot.hasData) {
+              return const ChatScreen();
+            }
+            return const AuthScreen();
           }),
     );
   }

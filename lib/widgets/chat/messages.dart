@@ -5,13 +5,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sixth_app/widgets/chat/message_bubble.dart';
 
 class Messages extends StatelessWidget {
+  const Messages({super.key});
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: Future.value(FirebaseAuth.instance.currentUser),
       builder: (ctx, futureSnapshot) {
         if (futureSnapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
@@ -22,7 +24,7 @@ class Messages extends StatelessWidget {
               .snapshots(),
           builder: (ctx, chatSnapshot) {
             if (chatSnapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }

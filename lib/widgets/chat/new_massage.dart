@@ -3,19 +3,24 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NewMessage extends StatefulWidget {
+  const NewMessage({super.key});
+
   @override
   State<NewMessage> createState() => _NewMessageState();
 }
 
 class _NewMessageState extends State<NewMessage> {
-  final _controller = new TextEditingController();
+  final _controller = TextEditingController();
   var _enteredMessage = '';
 
   void _sendMessage() async {
     FocusScope.of(context).unfocus();
-    final user = await FirebaseAuth
-        .instance.currentUser; //fetch the chat of the current user
-    final userData = await FirebaseFirestore.instance.collection('users').doc(user?.uid).get();
+    final user =
+        FirebaseAuth.instance.currentUser; //fetch the chat of the current user
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user?.uid)
+        .get();
     FirebaseFirestore.instance.collection('chat').add({
       'text': _enteredMessage,
       'createdAt': Timestamp.now(),
@@ -29,14 +34,16 @@ class _NewMessageState extends State<NewMessage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 8),
-      padding: EdgeInsets.all(8),
+      margin: const EdgeInsets.only(top: 8),
+      padding: const EdgeInsets.all(8),
       child: Row(
         children: [
           Expanded(
             child: TextField(
               controller: _controller,
-              decoration: InputDecoration(labelText: 'Send a Message...'),
+              textCapitalization: TextCapitalization.sentences,
+              enableSuggestions: true,
+              decoration: const InputDecoration(labelText: 'Send a Message...'),
               onChanged: (value) {
                 setState(() {
                   _enteredMessage = value;
@@ -46,7 +53,7 @@ class _NewMessageState extends State<NewMessage> {
           ),
           IconButton(
             color: Theme.of(context).colorScheme.primary,
-            icon: Icon(
+            icon: const Icon(
               Icons.send,
             ),
             onPressed: _enteredMessage.trim().isEmpty ? null : _sendMessage,
