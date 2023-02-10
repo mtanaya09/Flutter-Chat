@@ -2,7 +2,7 @@
     package="com.example.sixth_app">
    <application
         android:label="sixth_app"
-        android:name="${applicationName}"
+        android:name="Chat App"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

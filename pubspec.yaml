@@ -36,6 +36,7 @@ dependencies:
   image_picker: ^0.8.6+1
   firebase_storage: ^11.0.10
   firebase_messaging: ^14.2.1
+  
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -45,6 +46,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.8.1
+
+flutter_icons: 
+  android: true
+  ios: true
+  image_path: "dev_assets/shop_app.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "dev_assets/shop_app_adaptive.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
